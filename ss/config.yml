@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  become: no
+  gather_facts: no
+  tasks:
+  - copy: src=security/shadowsocks.json dest=/etc/
+  - copy: src=shadowsocks.service dest=/usr/lib/systemd/system/
+  - shell: systemctl daemon-reload
+  - shell: systemctl enable shadowsocks.service
+  - shell: systemctl start shadowsocks

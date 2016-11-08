@@ -1,0 +1,4 @@
+ss/security/
+proxychains-ng/
+openshift-ansible/
+*.log
