@@ -1,0 +1,13 @@
+#!/bin/bash
+source ../../log.sh
+source ../../clap.sh
+
+if [ "" == "$registry" ]; then
+  log 'please specify registry=yourregistry, e.g. ./exec-migrate-fabric8-2.1.19-image registry=172.16.5.60:5000'
+  exit 1
+fi
+
+./migrate-image-local 'openzipkin/zipkin:1.13.0  fabric8/fabric8-forge:2.3.58 fabric8/jenkins-jnlp-client:2.2.283 fabric8/gogs:v0.9.97 fabric8/openshift-s2i-jenkins-trigger fabric8/nexus:2.2.283 fabric8/jenkins-docker:2.2.283 fabric8/maven-builder mysql:5.7 fabric8/hystrix-dashboard:1.0.23 openzipkin/zipkin-query:1.39.3 fabric8/zipkin-mysql:0.0.8 fabric8/turbine-server:1.0.26 openshift/origin-logging-deployment:v1.4.0-alpha.1 noctarius/hazelcast-openshift:latest openshift/zookeeper-346-fedora20 cloudtrackinc/kubernetes-kafka' $registry
+
+exit 0
+

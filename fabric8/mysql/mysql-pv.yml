@@ -1,0 +1,34 @@
+kind: "List"
+apiVersion: "v1"
+items:
+- apiVersion: "v1"
+  kind: "PersistentVolumeClaim"
+  metadata:
+    labels:
+      provider: "openshift"
+      group: "io.openshift.devops.apps"
+    name: "mysql-storage"
+  spec:
+    accessModes:
+    - "ReadWriteOnce"
+    resources:
+      requests:
+        storage: "10Gi"
+    volumeName: "openshift-mysql-storage"
+
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: openshift-mysql-storage
+    labels:
+      provider: "openshift"
+      group: "io.openshift.devops.apps"
+  spec:
+    capacity:
+      storage: 10Gi
+    accessModes:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Recycle
+    nfs:
+      path: /data/nfs/volumes/mysql
+      server: 172.16.5.58

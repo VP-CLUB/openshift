@@ -4,7 +4,7 @@ items:
 - apiVersion: v1
   kind: PersistentVolume
   metadata:
-    name: pvdb
+    name: pv0001
     labels:
       provider: "openshift-origin"
       project: "demo"
@@ -12,11 +12,10 @@ items:
       group: "io.openshift.devops.apps"
   spec:
     capacity:
-      storage: 10Gi
+      storage: 30Gi
     accessModes:
       - ReadWriteOnce
     persistentVolumeReclaimPolicy: Recycle
     nfs:
-      path: /data/nfs/volumes/db
+      path: /var/lib/nfs
       server: 172.16.5.58
-

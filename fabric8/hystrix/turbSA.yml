@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  labels:
+    provider: fabric8
+    project: turbine-server
+    version: 1.0.26
+    group: io.fabric8.kubeflix
+  name: turbine
+  annotations: {}

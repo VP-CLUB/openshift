@@ -1,8 +1,8 @@
 {
-	"server": "47.89.178.33",
-	"server_port": "52055",
+	"server": "58.96.172.41",
+	"server_port": "55080",
 	"local_port": 1080,
-	"password": "@vpc1ub&*90",
+	"password": "vpclub.5566",
 	"timeout": 600,
 	"method": "aes-256-cfb"
 }

@@ -1,0 +1,59 @@
+kind: "List"
+apiVersion: "v1"
+items:
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    annotations:
+      maven.fabric8.io/source-url: >-
+        jar:file:/root/.m2/repository/io/fabric8/devops/apps/elasticsearch/2.2.283/elasticsearch-2.2.283.jar!/META-INF/fabric8/openshift.yml
+    labels:
+      group: io.fabric8.devops.apps
+      project: elasticsearch
+      provider: fabric8
+      version: 2.2.283
+    name: es-data
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 1Gi
+    volumeName: "fabric8-es-data"
+  endGroup: true
+  newGroup: true
+
+- apiVersion: "v1"
+  kind: "PersistentVolumeClaim"
+  metadata:
+    labels:
+      provider: "openshift"
+      group: "openshift.devops.apps"
+    name: "elasticsearch-storage"
+  spec:
+    accessModes:
+    - "ReadWriteOnce"
+    resources:
+      requests:
+        storage: "10Gi"
+    volumeName: "elasticsearch-storage"
+
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    labels:
+      provider: "openshift"
+      group: "openshift.devops.apps"
+    name: elasticsearch-storage
+  spec:
+    capacity:
+      storage: 20Gi
+    accessModes:
+      - ReadWriteMany
+    persistentVolumeReclaimPolicy: Recycle
+    nfs:
+#      path: /var/nfs
+#      server: 172.16.2.233
+      path: /data/nfs/volumes/es
+      server: 172.16.5.58
+

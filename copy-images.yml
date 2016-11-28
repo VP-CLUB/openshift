@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: no
+  gather_facts: no
+  tasks:
+  - shell: mkdir -p /root/dockerimages/fabric8/
+  - copy: src=./*.tar dest=/root/dockerimages/fabric8/
+  - shell: find . "*.tar" | xargs docker load -i chdir=/root/dockerimages/fabric8/

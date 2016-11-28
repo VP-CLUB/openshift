@@ -1,0 +1,48 @@
+#!/bin/bash
+source ../log.sh
+source ../clap.sh
+
+#project=kafka-cluster
+#src='template.json kafka-service.yaml kafka-rc.yaml'
+
+if [ "$method" == "" ]; then
+  log "please specify method pararm e.g.. ./install-openshift-zookeeper method=applyAll project=zookeeper-cluster src='template.json'
+"
+  exit
+fi
+
+if [ "$project" == "" ]; then
+  log "please specify project param e.g.. ./install-openshift-zookeeper method=applyAll project=zookeeper-cluster src='template.json'"
+  exit
+fi
+
+if [ "$src" == "" ]; then
+  log "please specify src param e.g.. ./install-openshift-zookeeper method=applyAll project=zookeeper-cluster src='template.json'"
+  exit
+fi
+
+oc new-project $project
+oc project $project
+function apply(){
+oc apply -f $1 -n $project
+}
+function delete(){
+oc delete -f $1 -n $project
+}
+
+function applyAll(){
+for n in $src;
+do
+  apply $n ;
+done
+}
+function deleteAll(){
+for n in $src;
+do
+  delete $n ;
+done
+}
+#exec bash
+
+log "exec $method ..."
+$method

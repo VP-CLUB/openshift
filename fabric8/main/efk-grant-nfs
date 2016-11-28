@@ -1,0 +1,7 @@
+#!/bin/bash
+useradd elasticsearch
+groupadd elasticsearch
+groupmod elasticsearch -g 108
+usermod elasticsearch -u 105
+
+

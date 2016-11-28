@@ -1,0 +1,20 @@
+kind: "List"
+apiVersion: "v1"
+items:
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: fabric8-mysql-data
+    labels:
+      provider: "fabric8"
+      group: "io.fabric8.devops.apps"
+  spec:
+    capacity:
+      storage: 20Gi
+    accessModes:
+      - ReadWriteOnce
+    persistentVolumeReclaimPolicy: Recycle
+    nfs:
+      path: /data/nfs/volumes/mysql
+      server: 172.16.5.58
+

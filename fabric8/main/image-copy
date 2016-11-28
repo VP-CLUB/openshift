@@ -1,0 +1,12 @@
+#!/bin/bash
+image=$1
+if [ "" == $image ]; then 
+  echo "please poinit image name"
+  exit
+fi
+
+for n in 1 2 3 4 5 6 7; do 
+scp -r $image root@172.16.5.6$n:
+done
+#batch to exec docker load
+ansible nodes -a "docker load -i $image"

@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  become: no
+  gather_facts: no
+  tasks:
+  - shell: docker pull 172.16.5.60:5000/openshift/origin-sti-builder:v1.4.0-alpha.1
+  - shell: docker pull 172.16.5.60:5000/openshift/node:v1.4.0-alpha.1
+  - shell: docker pull 172.16.5.60:5000/openshift/origin-haproxy-router:v1.4.0-alpha.1
+  - shell: docker pull 172.16.5.60:5000/openshift/origin-pod:v1.4.0-alpha.1
+  - shell: docker tag 172.16.5.60:5000/openshift/origin-sti-builder:v1.4.0-alpha.1 openshift/origin-sti-builder:v1.4.0-alpha.1
+  - shell: docker tag 172.16.5.60:5000/openshift/node:v1.4.0-alpha.1 openshift/node:v1.4.0-alpha.1
+  - shell: docker tag 172.16.5.60:5000/openshift/origin-haproxy-router:v1.4.0-alpha.1 openshift/origin-haproxy-router:v1.4.0-alpha.1
+  - shell: docker tag 172.16.5.60:5000/openshift/origin-pod:v1.4.0-alpha.1 openshift/origin-pod:v1.4.0-alpha.1
+
+

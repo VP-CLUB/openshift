@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: es-data
+    labels:
+      provider: fabric8
+      project: elasticsearch-k8s
+      group: io.fabric8.devops.apps
+  spec:
+    capacity:
+      storage: 30Gi
+    accessModes:
+    - ReadWriteMany
+    nfs:
+      path: /data/nfs/volumes/fabric8-data/es-data
+      server: 172.16.5.58
+    persistentVolumeReclaimPolicy: Retain
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      provider: fabric8
+      project: elasticsearch-k8s
+      group: io.fabric8.devops.apps
+    name: es-data
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 30Gi
+    volumeName: es-data
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: prometheus-data
+    labels:
+      provider: fabric8
+      project: prometheus
+      group: io.fabric8.devops.apps
+  spec:
+    capacity:
+      storage: 20Gi
+    accessModes:
+    - ReadWriteMany
+    nfs:
+      path: /data/nfs/volumes/fabric8-data/prometheus-data
+      server: 172.16.5.58
+    persistentVolumeReclaimPolicy: Retain
+
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      provider: fabric8
+      project: prometheus
+      group: io.fabric8.devops.apps
+    name: prometheus-data
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 20Gi
+    volumeName: prometheus-data
+
+- apiVersion: v1
+  kind: PersistentVolume
+  metadata:
+    name: grafana-data
+    labels:
+      provider: fabric8
+      project: grafana
+      group: io.fabric8.devops.apps
+  spec:
+    capacity:
+      storage: 20Gi
+    accessModes:
+    - ReadWriteMany
+    nfs:
+      path: /data/nfs/volumes/fabric8-data/grafana-data
+      server: 172.16.5.58
+    persistentVolumeReclaimPolicy: Retain
+
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    labels:
+      provider: fabric8
+      project: grafana
+      group: io.fabric8.devops.apps
+    name: grafana-data
+  spec:
+    accessModes:
+    - ReadWriteMany
+    resources:
+      requests:
+        storage: 20Gi
+    volumeName: grafana-data

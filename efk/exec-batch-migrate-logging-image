@@ -1,0 +1,18 @@
+#!/bin/bash
+source ../log.sh
+source ../clap.sh
+
+if [ "" == "$registry" ]; then
+  log 'please specify registry=yourregistry, e.g. ./exec-batch-migrate-logging-image registry=172.16.5.60:5000'
+  exit 1
+fi
+
+#if [ "" == "$versison" ]; then
+#  log 'please specify version=yourversion, e.g. ./migrate-logging-image registry=172.16.5.60:5000 version=v1.4.0-alpha.1'
+#  exit 1
+#fi
+
+./migrate-image-local "fabric8/elasticsearch-k8s:2.3.4 fabric8/elasticsearch-logstash-template:2.2.283 fabric8/fluentd-kubernetes:v1.19  fabric8/elasticsearch-k8s:2.3.4 fabric8/grafana:2.6.0 prom/blackbox-exporter:master prom/node-exporter prom/prometheus:v1.2.1 jimmidyson/configmap-reload:v0.1" $registry
+
+exit 0
+

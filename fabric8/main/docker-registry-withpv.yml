@@ -1,0 +1,247 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: fabric8-docker-registry
+  namespace: fabric8
+  selfLink: /oapi/v1/namespaces/fabric8/deploymentconfigs/fabric8-docker-registry
+  uid: 692a8667-abaa-11e6-b6bb-005056345498
+  resourceVersion: '28158'
+  generation: 6
+  creationTimestamp: '2016-11-16T03:11:47Z'
+  labels:
+    group: io.fabric8.devops.apps
+    project: fabric8-docker-registry
+    provider: fabric8
+    version: 2.2.283
+  annotations:
+    fabric8.io/build-id: '12'
+    fabric8.io/build-url: 'http://jenkins.ux.fabric8.io/job/oss-parent/12'
+    fabric8.io/git-branch: release-v2.2.283
+    fabric8.io/git-commit: 76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+    fabric8.io/git-url: >-
+      http://gogs.ux.fabric8.io/gogsadmin/oss-parent/commit/76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+    fabric8.io/iconUrl: >-
+      https://cdn.rawgit.com/fabric8io/fabric8-devops/master/fabric8-docker-registry/src/main/fabric8/icon.png
+    fabric8.io/metrics-path: >-
+      dashboard/file/kubernetes-pods.json/?var-project=fabric8-docker-registry&var-version=2.2.283
+    maven.fabric8.io/source-url: >-
+      jar:file:/root/.m2/repository/io/fabric8/devops/apps/fabric8-docker-registry/2.2.283/fabric8-docker-registry-2.2.283.jar!/META-INF/fabric8/openshift.yml
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 10800
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+  triggers:
+    - type: ConfigChange
+  replicas: 1
+  test: false
+  selector:
+    group: io.fabric8.devops.apps
+    project: fabric8-docker-registry
+    provider: fabric8
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        group: io.fabric8.devops.apps
+        project: fabric8-docker-registry
+        provider: fabric8
+        version: 2.2.283
+      annotations:
+        fabric8.io/build-id: '12'
+        fabric8.io/build-url: 'http://jenkins.ux.fabric8.io/job/oss-parent/12'
+        fabric8.io/git-branch: release-v2.2.283
+        fabric8.io/git-commit: 76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+        fabric8.io/git-url: >-
+          http://gogs.ux.fabric8.io/gogsadmin/oss-parent/commit/76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+        fabric8.io/iconUrl: >-
+          https://cdn.rawgit.com/fabric8io/fabric8-devops/master/fabric8-docker-registry/src/main/fabric8/icon.png
+        fabric8.io/metrics-path: >-
+          dashboard/file/kubernetes-pods.json/?var-project=fabric8-docker-registry&var-version=2.2.283
+    spec:
+      volumes:
+        - name: docker-registry
+          persistentVolumeClaim:
+            claimName: docker-registry
+      containers:
+        - name: fabric8-docker-registry
+          image: 'registry:2'
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+              value: /data
+          resources:
+            limits:
+              cpu: '0'
+              memory: '0'
+            requests:
+              cpu: '0'
+              memory: '0'
+          volumeMounts:
+            - name: docker-registry
+              mountPath: /data
+          terminationMessagePath: /dev/termination-log
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+status:
+  latestVersion: 3
+  observedGeneration: 6
+  replicas: 1
+  updatedReplicas: 1
+  availableReplicas: 1
+  details:
+    message: config change
+    causes:
+      - type: ConfigChange
+  conditions:
+    - type: Available
+      status: 'True'
+      lastTransitionTime: '2016-11-16T03:13:40Z'
+      message: Deployment config has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastTransitionTime: '2016-11-16T10:13:18Z'
+      reason: NewReplicationControllerAvailable
+      message: >-
+        Replication controller "fabric8-docker-registry-3" has completed
+        progressing
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  name: fabric8-docker-registry
+  namespace: fabric8
+  selfLink: /oapi/v1/namespaces/fabric8/deploymentconfigs/fabric8-docker-registry
+  uid: 692a8667-abaa-11e6-b6bb-005056345498
+  resourceVersion: '28158'
+  generation: 6
+  creationTimestamp: '2016-11-16T03:11:47Z'
+  labels:
+    group: io.fabric8.devops.apps
+    project: fabric8-docker-registry
+    provider: fabric8
+    version: 2.2.283
+  annotations:
+    fabric8.io/build-id: '12'
+    fabric8.io/build-url: 'http://jenkins.ux.fabric8.io/job/oss-parent/12'
+    fabric8.io/git-branch: release-v2.2.283
+    fabric8.io/git-commit: 76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+    fabric8.io/git-url: >-
+      http://gogs.ux.fabric8.io/gogsadmin/oss-parent/commit/76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+    fabric8.io/iconUrl: >-
+      https://cdn.rawgit.com/fabric8io/fabric8-devops/master/fabric8-docker-registry/src/main/fabric8/icon.png
+    fabric8.io/metrics-path: >-
+      dashboard/file/kubernetes-pods.json/?var-project=fabric8-docker-registry&var-version=2.2.283
+    maven.fabric8.io/source-url: >-
+      jar:file:/root/.m2/repository/io/fabric8/devops/apps/fabric8-docker-registry/2.2.283/fabric8-docker-registry-2.2.283.jar!/META-INF/fabric8/openshift.yml
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 10800
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+  triggers:
+    - type: ConfigChange
+  replicas: 1
+  test: false
+  selector:
+    group: io.fabric8.devops.apps
+    project: fabric8-docker-registry
+    provider: fabric8
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        group: io.fabric8.devops.apps
+        project: fabric8-docker-registry
+        provider: fabric8
+        version: 2.2.283
+      annotations:
+        fabric8.io/build-id: '12'
+        fabric8.io/build-url: 'http://jenkins.ux.fabric8.io/job/oss-parent/12'
+        fabric8.io/git-branch: release-v2.2.283
+        fabric8.io/git-commit: 76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+        fabric8.io/git-url: >-
+          http://gogs.ux.fabric8.io/gogsadmin/oss-parent/commit/76166f6c87b1468d6f7d9ce45b1321f33ffd6a04
+        fabric8.io/iconUrl: >-
+          https://cdn.rawgit.com/fabric8io/fabric8-devops/master/fabric8-docker-registry/src/main/fabric8/icon.png
+        fabric8.io/metrics-path: >-
+          dashboard/file/kubernetes-pods.json/?var-project=fabric8-docker-registry&var-version=2.2.283
+    spec:
+      volumes:
+        - name: docker-registry
+          persistentVolumeClaim:
+            claimName: docker-registry
+      containers:
+        - name: fabric8-docker-registry
+          image: 'registry:2'
+          ports:
+            - name: http
+              containerPort: 5000
+              protocol: TCP
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY
+              value: /data
+          resources:
+            limits:
+              cpu: '0'
+              memory: '0'
+            requests:
+              cpu: '0'
+              memory: '0'
+          volumeMounts:
+            - name: docker-registry
+              mountPath: /data
+          terminationMessagePath: /dev/termination-log
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+status:
+  latestVersion: 3
+  observedGeneration: 6
+  replicas: 1
+  updatedReplicas: 1
+  availableReplicas: 1
+  details:
+    message: config change
+    causes:
+      - type: ConfigChange
+  conditions:
+    - type: Available
+      status: 'True'
+      lastTransitionTime: '2016-11-16T03:13:40Z'
+      message: Deployment config has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastTransitionTime: '2016-11-16T10:13:18Z'
+      reason: NewReplicationControllerAvailable
+      message: >-
+        Replication controller "fabric8-docker-registry-3" has completed
+        progressing
+

@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: no
+  gather_facts: no
+  tasks:
+  - shell: sed -i '/ADD_REGISTRY=.*/c\ADD_REGISTRY="--add-registry 172.16.5.60:5000 --add-registry 172.30.0.0/16"' /etc/sysconfig/docker 
+  - shell: sed -i '/INSECURE_REGISTRY=.*/c\INSECURE_REGISTRY="--insecure-registry 172.16.5.60:5000 --insecure-registry 172.30.0.0/16 "' /etc/sysconfig/docker 
+  - shell: systemctl restart docker 

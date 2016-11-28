@@ -1,0 +1,30 @@
+#!/bin/bash
+appname=$1
+registry=$2
+
+if [ "$appname" == "" ]; then
+
+  echo  "please add first appname param"  
+
+  exit
+fi
+if [ "$registry" == "" ]; then
+
+  echo  "please add second registry param"
+
+  exit
+fi
+
+function migrate-image (){
+appname=$1
+registry=$2
+sudo docker pull $appname
+sudo docker tag $appname  $registry/$appname  
+echo "build success"
+sudo docker push $registry/$appname
+docker rmi $registry/$appname
+}
+#exec
+for n in $appname ; do
+ migrate-image $n $registry
+done
